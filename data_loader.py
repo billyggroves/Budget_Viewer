@@ -1,12 +1,11 @@
 import csv
 import os
+from transaction import Transaction, Transaction_Type
 
 """
     TODO
         - Create categorys, with rules
-        - update load() to
-            - Check if row[1] in category
-            - sum by category
+        - Fix bug with Negative transactions in Checking vs CC payments
 """
 
 
@@ -21,7 +20,12 @@ def load():
             credit = 0
             for i, row in enumerate(reader):
                 if i == 0:
-                    description = row.index('Description')
+                    if 'Transaction' in row:
+                        transaction_type = row.index('Transaction')
+                    if 'Description' in row:
+                        description = row.index('Description')
+                    elif 'Name' in row:
+                        description = row.index('Name')
                     if 'Amount' in row:
                         debit = row.index('Amount')
                     if 'Debit' in row:
@@ -31,12 +35,14 @@ def load():
                     # print(f"indexes: {description}, {debit}, {credit}")
                     continue
                 if row[debit] == '':
-                    transaction = (row[description],0.00,float(row[credit]))
-                elif float(row[debit]) < 0:
-                    transaction = (row[description],0.00,float(row[debit]))
+                    transaction = Transaction(row[description],Transaction_Type.CREDIT,abs(float(row[credit])))
+                elif float(row[debit]) < 0 or (transaction_type and transaction_type == "CREDIT"):
+                    transaction = Transaction(row[description],Transaction_Type.CREDIT,abs(float(row[debit])))
                 else:
-                    transaction = (row[description],float(row[debit]),0.00)
+                    transaction = Transaction(row[description],Transaction_Type.DEBIT,abs(float(row[debit])))
                 transactions.append(transaction)
+    for tran in transactions:
+        print(tran)
     return transactions
     
 
