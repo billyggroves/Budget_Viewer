@@ -1,7 +1,8 @@
-from diagram import build_diagram
+#from diagram import build_diagram
+from data_loader import load
 
 def main():
-    build_diagram()
+    load()
 
 if __name__ == "__main__":
     main()

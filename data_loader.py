@@ -1,12 +1,7 @@
 import csv
 import os
+import categories
 from transaction import Transaction
-
-"""
-    TODO
-        - Create categorys, with rules and potentially create more branches in transactions{}
-"""
-
 
 def load():
     transactions = {}
@@ -51,19 +46,19 @@ def load():
                     and amount is not None):
                         if t_type is not None:
                             if row[t_type] == "DEBIT":
-                                transactions['debit'].append(Transaction(row[date],row[description],float(row[amount])))
+                                transactions['debit'].append(Transaction(row[date],check_category(row[description], "DEBIT"),row[description],float(row[amount])))
                             elif row[t_type] == "CREDIT":
-                                transactions['credit'].append(Transaction(row[date],row[description],float(row[amount])))
+                                transactions['credit'].append(Transaction(row[date],check_category(row[description], "CREDIT"),row[description],float(row[amount])))
                         else:
                             if float(row[amount]) > 0.0:
-                                transactions['debit'].append(Transaction(row[date],row[description],float(row[amount])))
+                                transactions['debit'].append(Transaction(row[date],check_category(row[description], "DEBIT"),row[description],float(row[amount])))
                             else:
-                                transactions['credit'].append(Transaction(row[date],row[description],float(row[amount])))
+                                transactions['credit'].append(Transaction(row[date],check_category(row[description], "CREDIT"),row[description],float(row[amount])))
                     elif debit is not None and credit is not None:
                         if row[credit] == '':
-                            transactions['debit'].append(Transaction(row[date],row[description],float(row[debit])))
+                            transactions['debit'].append(Transaction(row[date],check_category(row[description], "DEBIT"),row[description],float(row[debit])))
                         else:
-                            transactions['credit'].append(Transaction(row[date],row[description],float(row[credit])))
+                            transactions['credit'].append(Transaction(row[date],check_category(row[description], "CREDIT"),row[description],float(row[credit])))
                     else:
                         print(f"something is wrong with this transaction: {row}")
                 else:
@@ -78,4 +73,37 @@ def load():
     return transactions
     
 
-load()
+def check_category(description, t_type):
+    if t_type == "CREDIT":
+        if check_category_items(description, categories.Income):
+            return "Income"
+        elif check_category_items(description, categories.Misc_income):
+            return "Misc Income"
+        else:
+            return "Needs Checked"
+    if t_type == "DEBIT":
+        if check_category_items(description, categories.Mortgage_rent):
+            return "Mortgage/Rent"
+        elif check_category_items(description, categories.Utilities):
+            return "Utilities"
+        elif check_category_items(description, categories.Groceries):
+            return "Groceries"
+        elif check_category_items(description, categories.Gas):
+            return "Fuel"
+        elif check_category_items(description, categories.Insurance):
+            return "Insurance"
+        elif check_category_items(description, categories.Restaurants):
+            return "Restaurants"
+        elif check_category_items(description, categories.Shopping):
+            return "Shopping"
+        elif check_category_items(description, categories.Subscriptions):
+            return "Subscriptions"
+        else:
+            return "Misc"
+    return Exception("Missing Transaction Type")
+
+def check_category_items(description, category):
+    for item in category:
+        if item.lower() in description.lower():
+            return True
+    return False
