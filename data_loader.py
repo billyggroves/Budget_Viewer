@@ -75,28 +75,28 @@ def load():
 
 def check_category(description, t_type):
     if t_type == "CREDIT":
-        if check_category_items(description, categories.Income):
+        if check_category_items(description, categories.INCOME):
             return "Income"
-        elif check_category_items(description, categories.Misc_income):
+        elif check_category_items(description, categories.MISC_INCOME):
             return "Misc Income"
         else:
             return "Needs Checked"
     if t_type == "DEBIT":
-        if check_category_items(description, categories.Mortgage_rent):
+        if check_category_items(description, categories.MORTGAGE_RENT):
             return "Mortgage/Rent"
-        elif check_category_items(description, categories.Utilities):
+        elif check_category_items(description, categories.UTILITIES):
             return "Utilities"
-        elif check_category_items(description, categories.Groceries):
+        elif check_category_items(description, categories.GROCERIES):
             return "Groceries"
-        elif check_category_items(description, categories.Gas):
+        elif check_category_items(description, categories.GAS):
             return "Fuel"
-        elif check_category_items(description, categories.Insurance):
+        elif check_category_items(description, categories.INSURANCE):
             return "Insurance"
-        elif check_category_items(description, categories.Restaurants):
+        elif check_category_items(description, categories.RESTAURANTS):
             return "Restaurants"
-        elif check_category_items(description, categories.Shopping):
+        elif check_category_items(description, categories.SHOPPING):
             return "Shopping"
-        elif check_category_items(description, categories.Subscriptions):
+        elif check_category_items(description, categories.SUBSCRIPTIONS):
             return "Subscriptions"
         else:
             return "Misc"

@@ -2,14 +2,28 @@
 ### Transaction Categories
 """
 
+CATEGORIES = [
+    "Income",
+    "Misc Income",
+    "Mortgage/Rent",
+    "Utilities",
+    "Groceries",
+    "Fuel",
+    "Insurance",
+    "Restaurants",
+    "Shopping",
+    "Subscriptions",
+    "Misc"
+]
+
 # Credits
-Income = [
+INCOME = [
     'ELECTRONIC DEPOSIT',
     'PAYCHECK',
     'SALARY',
     'WAGES'
 ]
-Misc_income = [
+MISC_INCOME = [
     'REFUND',
     'CREDIT',
     'REWARD',
@@ -20,13 +34,13 @@ Misc_income = [
 
 # Debits
 # Living Expenses
-Mortgage_rent = [
+MORTGAGE_RENT = [
     'RENT',
     'MORTGAGE',
     'LANDLORD',
     'HOUSING'
 ]
-Utilities = [
+UTILITIES = [
     'SPECTRUM',
     'DPL',
     'DUKE ENERGY',
@@ -35,7 +49,7 @@ Utilities = [
     'GAS BILL',
     'CITY OF'
 ]
-Groceries = [
+GROCERIES = [
     'KROGER',
     'WINN-DIXIE',
     'WAL-MART',
@@ -47,7 +61,7 @@ Groceries = [
     'COSTCO',
     'SAM\'S CLUB'
 ]
-Gas = [
+GAS = [
     'FUEL',
     'GAS',
     'EXXONMOBIL',
@@ -60,7 +74,7 @@ Gas = [
     'MARATHON',
     'BUC-EE\'S'
 ]
-Insurance = [
+INSURANCE = [
     'GEICO',
     'STATE FARM',
     'ALLSTATE',
@@ -70,7 +84,7 @@ Insurance = [
 ]
 
 # Misc Spending
-Restaurants = [
+RESTAURANTS = [
     'MCDONALDS',
     'TACO BELL',
     'WENDY\'S',
@@ -92,7 +106,7 @@ Restaurants = [
     'SUBWAY',
     'PIZZA HUT'
 ]
-Shopping = [
+SHOPPING = [
     'AMAZON',
     'CVS/PHARMACY',
     'TARGET',
@@ -103,7 +117,7 @@ Shopping = [
     'ABC*MIDWEST SHOOTING',
     'HAWX LLC'
 ]
-Subscriptions = [
+SUBSCRIPTIONS = [
     'NETFLIX',
     'HBO MAX',
     'GOOGLE *',
