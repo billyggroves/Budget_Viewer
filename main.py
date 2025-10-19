@@ -1,9 +1,9 @@
+from category_loader import load_categories
 from diagram import build_diagram
-from data_loader import load
 
 def main():
-    load()
-    build_diagram()
+    categories = load_categories()
+    build_diagram(categories)
 
 if __name__ == "__main__":
     main()

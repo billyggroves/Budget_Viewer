@@ -5,6 +5,9 @@
 CATEGORIES = [
     "Income",
     "Misc Income",
+    "Total Income",
+    "Profit",
+    "",
     "Mortgage/Rent",
     "Utilities",
     "Groceries",
@@ -13,7 +16,8 @@ CATEGORIES = [
     "Restaurants",
     "Shopping",
     "Subscriptions",
-    "Misc"
+    "Misc",
+    "Total Liabilities"
 ]
 
 # Credits
@@ -38,7 +42,8 @@ MORTGAGE_RENT = [
     'RENT',
     'MORTGAGE',
     'LANDLORD',
-    'HOUSING'
+    'HOUSING',
+    'COOPER'
 ]
 UTILITIES = [
     'SPECTRUM',
@@ -113,9 +118,7 @@ SHOPPING = [
     'WALMART',
     'BEST BUY',
     'HOME DEPOT',
-    'LOWES',
-    'ABC*MIDWEST SHOOTING',
-    'HAWX LLC'
+    'LOWES'
 ]
 SUBSCRIPTIONS = [
     'NETFLIX',
@@ -128,5 +131,7 @@ SUBSCRIPTIONS = [
     'SPOTIFY',
     'APPLE MUSIC',
     'ADOBE',
-    'MICROSOFT'
+    'MICROSOFT',
+    'ABC*MIDWEST SHOOTING',
+    'HAWX LLC'
 ]

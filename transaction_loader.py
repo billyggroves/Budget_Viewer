@@ -3,12 +3,14 @@ import os
 import categories
 from transaction import Transaction
 
-def load():
+def load_transactions():
     transactions = {}
     transactions['credit'] = []
     transactions['debit'] = []
     directory = "./data"
     for file in os.listdir(directory):
+        if ".csv" not in file.lower():
+            continue
         with open(directory + '/' + file, mode='r') as file:
             reader = csv.reader(file)
             print(f"loading.... {file.name}")
@@ -39,7 +41,7 @@ def load():
                 if date is not None and description is not None:
                     # TODO Find better way to achieve this, as it could cause issues
                     # potential fixes, if (name of CC company in ...)
-                    if "payment" in row[description].lower():
+                    if "payment" in row[description].lower() or "PMT CITI".lower() in row[description].lower():
                         continue
                     if (debit is None 
                     and credit is None 
@@ -64,12 +66,12 @@ def load():
                 else:
                     print(f"something is wrong with this transaction or CSV: {row}")
             print(f"{len(transactions['credit']) + len(transactions['debit'])} transactions loaded")
-    for tran in transactions['credit']:
-        print("Credit")
-        print(tran)
-    for tran in transactions['debit']:
-        print("Debit")
-        print(tran)
+    # for tran in transactions['credit']:
+    #     print("Credit")
+    #     print(tran)
+    # for tran in transactions['debit']:
+    #     print("Debit")
+    #     print(tran)
     return transactions
     
 
