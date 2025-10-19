@@ -22,8 +22,7 @@ def find_sums():
         sums[cat] = sum_category(transactions, cat)
     sums["Total Income"] = sums["Income"] + sums["Misc Income"]
     sums["Total Liabilities"] = sums["Mortgage/Rent"] + sums["Utilities"] + sums["Groceries"] + sums["Fuel"] + sums["Insurance"] + sums["Restaurants"] + sums["Shopping"] + sums["Subscriptions"] + sums["Misc"]
-    sums["Profit"] = sums["Total Income"] - sums["Total Liabilities"]
-    sums[""] = sums["Profit"]
+    sums["Savings"] = sums["Total Income"] - sums["Total Liabilities"]
     return sums
     
 def sum_category(transactions, category):

@@ -13,7 +13,7 @@ def build_diagram(categories):
     # - 'label': List of node names (strings). Each entry corresponds to a node.
     # - 'color': List of colors for each node (strings, e.g., color names or hex codes).
     nodes = dict(
-        # label=["Income", "Misc Income", "Total Income", "Mortgage/Rent", "Utilities", "Groceries", "Fuel", "Insurance", "Restaurants", "Shopping", "Subscriptions", "Misc", "Total Liabilites", "Profit", ""],  # Set by providing a list of strings matching the number of nodes.
+        # label=["Income", "Misc Income", "Total Income", "Mortgage/Rent", "Utilities", "Groceries", "Fuel", "Insurance", "Restaurants", "Shopping", "Subscriptions", "Misc", "Total Liabilites", "Savings", ""],  # Set by providing a list of strings matching the number of nodes.
         label=CATEGORIES,
         color= load_node_colors(categories)  # Set by providing a list of color strings, one per node.
     )
@@ -44,6 +44,8 @@ def build_diagram(categories):
     # - node: Pass the nodes dict to configure nodes.
     # - link: Pass the links dict to configure flows.
     sankey = go.Sankey(
+        valueformat=".2f",  # show as full integer, no rounding (e.g., 2830)
+        valuesuffix=" USD",  # optional suffix (e.g., $, units, etc.)
         node=nodes,  # Set by assigning the nodes dictionary.
         link=links   # Set by assigning the links dictionary.
     )

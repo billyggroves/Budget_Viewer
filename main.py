@@ -5,14 +5,11 @@ from diagram import build_diagram
 TODO:
     Add testing
     Edge cases
-        Negative Profit
         Rethink handling of CC payments, count or ignore?
     Add more transaction label filtering
-    Change Profit to Savings
     General cleanup and refactoring
+    Add node alignment to keep from crossovers or overlaps
     Sankey frontend, make it pretty :D
-    Remove the blank node?
-    Add lables to links?
 """
 
 def main():

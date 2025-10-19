@@ -10,8 +10,7 @@ class Category:
         
     def get_node_color(self, label):
         if ("income" in label.lower()
-            or "" == label
-            or "profit" in label.lower()
+            or "savings" in label.lower()
         ):
             return "#00FF00"
         else:
@@ -30,6 +29,22 @@ class Category:
                 link_colors.append("#90EE90")
                 return sources,targets,values,link_colors
             case "Total Income":
+                if sums["Savings"] > 0:
+                    sources.append(source)
+                    targets.append(CATEGORIES.index("Savings"))
+                    values.append(float(sums["Savings"]))
+                    link_colors.append("#90EE90")
+                    sources.append(source)
+                    targets.append(CATEGORIES.index("Total Liabilities"))
+                    values.append(float(sums["Total Liabilities"]))
+                    link_colors.append("#FF9999")
+                else:
+                    sources.append(source)
+                    targets.append(CATEGORIES.index("Total Liabilities"))
+                    values.append(float(sums["Total Income"]))
+                    link_colors.append("#FF9999")
+                return sources,targets,values,link_colors
+            case "Total Liabilities":
                 sources.append(source)
                 targets.append(CATEGORIES.index("Mortgage/Rent"))
                 values.append(float(sums["Mortgage/Rent"]))
@@ -66,27 +81,23 @@ class Category:
                 targets.append(CATEGORIES.index("Misc"))
                 values.append(float(sums["Misc"]))
                 link_colors.append("#FF6666")
-                sources.append(source)
-                targets.append(CATEGORIES.index(""))
-                values.append(float(sums["Profit"]))
-                link_colors.append("#90EE90")
                 return sources,targets,values,link_colors
-            case "":
-                sources.append(source)
-                targets.append(CATEGORIES.index("Profit"))
-                values.append(float(sums["Profit"]))
-                link_colors.append("#90EE90")
-            case "Profit" | "Total Liabilities":
-                return sources,targets,values,link_colors
-            case _:
-                sources.append(source)
-                targets.append(CATEGORIES.index("Total Liabilities"))
-                values.append(float(sums[label]))
-                if label in CATEGORIES[5:10]:
-                    link_colors.append("#FF9999")
-                else:
+            case "Savings":
+                if sums["Savings"] < 0:
+                    sources.append(source)
+                    targets.append(CATEGORIES.index("Total Liabilities"))
+                    values.append(float(abs(sums["Savings"])))
                     link_colors.append("#FF6666")
                 return sources,targets,values,link_colors
+            # case _:
+            #     sources.append(source)
+            #     targets.append(CATEGORIES.index("Total Liabilities"))
+            #     values.append(float(sums[label]))
+            #     if label in CATEGORIES[5:10]:
+            #         link_colors.append("#FF9999")
+            #     else:
+            #         link_colors.append("#FF6666")
+            #     return sources,targets,values,link_colors
         return sources,targets,values,link_colors
 
     def __repr__(self):
